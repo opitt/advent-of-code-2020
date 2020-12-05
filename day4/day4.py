@@ -30,7 +30,7 @@ for p in passports:
         num, unit = int(pel.get("hgt", "00xx")[:-2]), pel.get("hgt","00xx")[-2:]
         valid &= (unit == "cm" and num >= 150 and num <=193 or 
                            unit == "in" and num >= 59 and num <=76)
-    for pattern, key in [(r"^#[\dabcdef]{6}$","hcl"), (r"^[\d]{9}$","pid") ]:
+    for pattern, key in [(r"^#[\da-f]{6}$","hcl"), (r"^[\d]{9}$","pid") ]:
         match = re.fullmatch(pattern, pel.get(key,""))
         valid &= (match != None)
     
