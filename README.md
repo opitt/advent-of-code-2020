@@ -8,7 +8,7 @@ _General_
 * Thanks to Björn Söderqvist aka cybear for the inspiration to track learning in the README.md file
 
 _About Github_
-* To add my 5 solutions to github.
+* Finally learned (again) to create a public github repo and add my daily solutions to it.
 
 _About Python_
 * I wanted to practice the zip and map functions. I noticed that the [map()] creates a list containing a map object, instead the content of the mapping operation. Instead list(map()) works as I wanted. 
