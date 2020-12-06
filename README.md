@@ -13,3 +13,17 @@ _About Github_
 _About Python_
 * I wanted to practice the zip and map functions. I noticed that the [map()] creates a list containing a map object, instead the content of the mapping operation. Instead list(map()) works as I wanted. 
 - - -
+## Day 6
+_About Python_
+* Learned to apply set operations on a list of sets
+* Learned more about the unpacking \*
+
+_About Github_
+* Start to get familiar with markdown
+
+_Resources_
+* [Real Python](https://realpython.com/python-sets/#operating-on-a-set)
+* [Mastering Markdown](https://guides.github.com/features/mastering-markdown/)
+
+_About Visual Studio Code_
+* Learned to debug with VSC
