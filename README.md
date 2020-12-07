@@ -12,7 +12,7 @@ _About Github_
 
 _About Python_
 * I wanted to practice the zip and map functions. I noticed that the [map()] creates a list containing a map object, instead the content of the mapping operation. Instead list(map()) works as I wanted. 
-- - -
+
 ## Day 6
 _About Python_
 * Learned to apply set operations on a list of sets
@@ -27,3 +27,11 @@ _Resources_
 
 _About Visual Studio Code_
 * Learned to debug with VSC
+
+## Day 7
+_About Python_
+* Using os.path.dirname(os.path.realpath(__file__)) to open a file in the same directory as the script. (KUDOS to @dogmatic69)
+
+_General_
+* Giving variables a meaningful name is an art. I think I changed my vars 5 times each, until it mades sense (to me).
+
