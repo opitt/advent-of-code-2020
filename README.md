@@ -35,3 +35,6 @@ _About Python_
 _General_
 * Giving variables a meaningful name is an art. I think I changed my vars 5 times each, until it mades sense (to me).
 
+## Day 8
+_Python_
+* Deep copy vs shallow copy: I knew about the difference, but used list.copy() without understanding, it is a shallow copy. Then I found the package copy with the deepcopy() function. Nice. Until I refactored a solution, that doesn't need to copy the list at all. Much better performance ...
