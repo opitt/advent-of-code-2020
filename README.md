@@ -38,3 +38,7 @@ _General_
 ## Day 8
 _Python_
 * Deep copy vs shallow copy: I knew about the difference, but used list.copy() without understanding, it is a shallow copy. Then I found the package copy with the deepcopy() function. Nice. Until I refactored a solution, that doesn't need to copy the list at all. Much better performance ...
+
+## Day 9
+_General_
+* Reading the assignment is critical (really?). Smallest and biggest number ... I interpreted as lowest and highest index ... Wrong assumption. RTF rules!
