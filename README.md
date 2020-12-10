@@ -42,3 +42,7 @@ _Python_
 ## Day 9
 _General_
 * Reading the assignment is critical (really?). Smallest and biggest number ... I interpreted as lowest and highest index ... Wrong assumption. RTF rules!
+
+## Day 10
+_Python_
+* Removing items from a list ... sometimes the simple things are just gone from the brain ... Thank you Google.
