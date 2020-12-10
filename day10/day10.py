@@ -1,14 +1,16 @@
 # https://adventofcode.com/2020/day/10
 
 import os
-
+import copy
 
 def main(day):
     # READ INPUT FILE
     script_path = os.path.dirname(os.path.realpath(__file__))
     with open(os.path.join(script_path, f"input_day{day}.txt"), encoding="utf-8") as input:
+#    with open(os.path.join(script_path, f"test.txt"), encoding="utf-8") as input:
         adapters = input.readlines()
     adapters = sorted([int(n.rstrip()) for n in adapters])
+    adapters2 = copy.deepcopy(adapters)
     
     #part 1
     #differences between the charging outlet, the adapters, and your device
@@ -38,7 +40,42 @@ def main(day):
     print(f"{result_part1} solution part 1.")
     
     #part 2
-    result_part2 = 0
+    def combine(adapter_chain):
+        print(adapter_chain)
+        l = len(adapter_chain)
+        #could be more than 5!
+        # [23] or [23, 24] 
+        if l == 1 or l==2:
+            return 1
+        gap = l - 2
+        valid_combo = 0
+        for possible in range(2**gap):
+            bin_opt = f"{possible:>0{gap}b}"
+            valid_combo += bin_opt.find("000") == -1 #check if the gap is bigger than 3 jolts 
+            #print (bin_opt, bin_opt.find("000"))
+        return valid_combo
+
+    jolt3splits = [[0]]  #add the first outlet to the 
+    result_part2, combos = 1, 0
+    print(adapters2)
+    for i in range(len(adapters2)): 
+        if jolt3splits[-1][-1] + 1 == adapters2[i]:
+            jolt3splits[-1].append(adapters2[i])
+            if i == len(adapters2) - 1:
+                combos = combine(jolt3splits[-1])
+                print(combos)
+                result_part2 *= combos
+                jolt3splits.append([adapters2[i]])
+        else:
+            combos = combine(jolt3splits[-1])
+            print(combos)
+            result_part2 *= combos
+            jolt3splits.append([adapters2[i]])
+        
+    19208
+    2744
+
+    #493455671296 too low
     print(f"{result_part2} solution part 2.")
 
 main(10)
