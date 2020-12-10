@@ -1,7 +1,6 @@
 # https://adventofcode.com/2020/day/10
 
 import os
-import copy
 
 def main(day):
     # READ INPUT FILE
@@ -10,72 +9,52 @@ def main(day):
 #    with open(os.path.join(script_path, f"test.txt"), encoding="utf-8") as input:
         adapters = input.readlines()
     adapters = sorted([int(n.rstrip()) for n in adapters])
-    adapters2 = copy.deepcopy(adapters)
     
-    #part 1
-    #differences between the charging outlet, the adapters, and your device
-    jolt_diffs={1:0, 2:0, 3:0} #
-    chain = [0]  # the outlet
-    while True:
-        #check, which adapters fit into the connected adapter
-        if chain[-1] + 1 in adapters:
-            adapters.remove(chain[-1] + 1)
-            chain.append(chain[-1] + 1)
-            jolt_diffs[1] += 1      #this covers the outlot to first adapter caseas well: 0 -> 1
-        elif chain[-1] + 2 in adapters:
-            adapters.remove(chain[-1] + 2)
-            chain.append(chain[-1] + 2)
-            jolt_diffs[2] +=1
-        elif chain[-1] + 3 in adapters:
-            adapters.remove(chain[-1] + 3)
-            chain.append(chain[-1] + 3)
-            jolt_diffs[3] +=1
-        else:
-            #no adapter can be connected
-            print("No adapter fits left")
-            jolt_diffs[3] +=1       #this covers the adapter -> device case: +3
-            break
+    #PART 1
+    #calculate the joltage difference between the adapters
+    jolt_diffs = [adapter[1] - adapter[0] for adapter in zip(adapters[:-1], adapters[1:])]
+    jolt_diffs.append(adapters[0] - 0) #add the difference between outlet (0) and the first adapter
+    jolt_diffs.append(3) #add the difference between the last adapter and the device
+    jolt_diffs_count = {dif: jolt_diffs.count(dif) for dif in range(1, 4)}
 
-    result_part1=jolt_diffs[1]*jolt_diffs[3]
-    print(f"{result_part1} solution part 1.")
+    result_part1 = jolt_diffs_count[1]*jolt_diffs_count[3]
+    print(f"The number of 1-jolt differences multiplied by the number of 3-jolt differences is {result_part1}.") #2470
     
     #part 2
     def combine(adapter_chain):
-        print(adapter_chain)
-        l = len(adapter_chain)
-        #could be more than 5!
-        # [23] or [23, 24] 
-        if l == 1 or l==2:
-            return 1
-        gap = l - 2
-        valid_combo = 0
-        for possible in range(2**gap):
-            bin_opt = f"{possible:>0{gap}b}"
-            valid_combo += bin_opt.find("000") == -1 #check if the gap is bigger than 3 jolts 
-            #print (bin_opt, bin_opt.find("000"))
-        return valid_combo
+        # e.g. [23] or [23, 24] or [23,24,25,26,27] 
+        gap = max(0,len(adapter_chain) - 2) # the first and the last stay in place!
+        # find all possible binary combinations for the gap
+        #valid combinations have not more than 3 zeros i.e. not more than 3 jolts difference 
+        valid_combos = sum([f"{b:>0{gap}b}".find("000") == -1 for b in range(2**gap)])
+        return valid_combos
 
-    jolt3splits = [[0]]  #add the first outlet to the 
+    # idea: split the set of adapters in groups
+    # [1,2,3,6,7,8,9,12,15,16]
+    # split criteria: a joltage gap of 3
+    # [1,2,3]---[6,7,8,9]---[12]---[15,16]
+    # the first and the last adapter in such a group needs to stay in position (otherwise the criteria of a max gap 3 is broken)
+    # so we only need to find valid combinations within the first and last adapter in a group
+    # valid combinations: binary counting: 00 01 10 00 ... all combinations that contain more than 3 zeros in the binary string violate the max gap 3 rule and are not valid 
+    group = [0]  #add the outlet to the first group
     result_part2, combos = 1, 0
-    print(adapters2)
-    for i in range(len(adapters2)): 
-        if jolt3splits[-1][-1] + 1 == adapters2[i]:
-            jolt3splits[-1].append(adapters2[i])
-            if i == len(adapters2) - 1:
-                combos = combine(jolt3splits[-1])
-                print(combos)
+    #print(adapters2)
+    for i in range(len(adapters)):
+        #does the adapter has a gap of 1?
+        if group[-1] + 1 == adapters[i]:
+            # attach the adapter
+            group.append(adapters[i])
+            if i == len(adapters) - 1:
+                #this adapter is the last one, need to asses the last group
+                combos = combine(group)
                 result_part2 *= combos
-                jolt3splits.append([adapters2[i]])
+                group = [adapters[i]] # start a new group
         else:
-            combos = combine(jolt3splits[-1])
-            print(combos)
+            # gap is bigger than 1, find combinations for the group and start a new group 
+            combos = combine(group)
             result_part2 *= combos
-            jolt3splits.append([adapters2[i]])
+            group = [adapters[i]]
         
-    19208
-    2744
-
-    #493455671296 too low
-    print(f"{result_part2} solution part 2.")
+    print(f"The total number of distinct ways you can arrange the adapters to connect the charging outlet to your device is {result_part2}.") #1973822685184
 
 main(10)

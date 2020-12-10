@@ -44,5 +44,14 @@ _General_
 * Reading the assignment is critical (really?). Smallest and biggest number ... I interpreted as lowest and highest index ... Wrong assumption. RTF rules!
 
 ## Day 10
+_General_
+* Pen and paper is still an excellent tool to understand a problem.
+* Breaking down a problem into smaller problems is a very good strategy.
+* After having a solution - it is so much easier and fun to refactor the code. I even found a totally different solution in 4 lines. Find a solution that proofs you understand the problem at hand. Then, and only then, optimise your code.
+* I notice, that every day during this challenge my code gets nicer to look at. Better structure, better comments (I hope) better variable names.
+* Debugging is the only way to find errors in complex situations. My code left out the last "adapter group". I only saw that in the debugger ...
+
 _Python_
 * Removing items from a list ... sometimes the simple things are just gone from the brain ... Thank you Google.
+* Using the zip function to calculate the difference of elements in a list. Sooo neat ...
+
