@@ -55,3 +55,11 @@ _Python_
 * Removing items from a list ... sometimes the simple things are just gone from the brain ... Thank you Google.
 * Using the zip function to calculate the difference of elements in a list. Sooo neat ...
 
+## Day 11
+_General_
+* Matrix is a challenge. Rows, coluns, ... diagonal movements ...
+* Part 1 was fairly easy but part two took me long to code. Easy on paper though ...
+
+_Python_
+* I get used to the itertools. count was cool to use for one generic function, that can go in all directions through a matrix. I just pass the -1,0,+1 step value as parameter to the function. Inside I use count and the given step. 
+* Used copy.deepcopy again. 
