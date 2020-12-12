@@ -4,6 +4,11 @@ import os
 import copy
 from itertools import count
 
+def write_simulation(plan, simno):
+    script_path = os.path.dirname(os.path.realpath(__file__))
+    with open(os.path.join(script_path, "sim_data", f"sim_{simno:02}.txt"), mode="w", encoding="utf-8") as ouput:
+        ouput.writelines("\n".join(["".join([*line]) for line in plan]))
+
 def main(day):
     # READ INPUT FILE
     script_path = os.path.dirname(os.path.realpath(__file__))
@@ -17,7 +22,7 @@ def main(day):
 
     #! add walls as floor ".""
     #! so the seat plan starts with index 1 and ends with -2
-    wall = [FLOOR]*(len(plan[0])+1)
+    wall = [FLOOR]*(len(plan[0])+2)
     newplan = [wall] # the top wall
     newplan.extend( [[FLOOR]+[*row]+[FLOOR] for row in plan] ) #build the left and right wall
     newplan.append(wall) # the bottom wall
@@ -116,9 +121,12 @@ def main(day):
     simplan = copy.deepcopy(plan)
     newplan = copy.deepcopy(plan)
     simcnt = count(1)
+
+    write_simulation(newplan, 0)
     while True:
         changes = 0
-        print(f">> Simulation {next(simcnt)}\n", "\n".join(["".join(row)[1:-1] for row in simplan[1:-1]]) + "\n")
+        sim = next(simcnt)
+        print(f">> Simulation {sim}\n", "\n".join(["".join(row)[1:-1] for row in simplan[1:-1]]) + "\n")
         for r in range(1, len(newplan)-1):
             for c in range(1,len(newplan[0]) - 1):
                 if simseating2(newplan, r, c):
@@ -126,6 +134,7 @@ def main(day):
 
         if changes>0:
             newplan = copy.deepcopy(simplan)
+            write_simulation(newplan, sim)
         else:
             break
     
