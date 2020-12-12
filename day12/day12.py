@@ -7,8 +7,8 @@ def main(day):
     script_path = os.path.dirname(os.path.realpath(__file__))
     with open(os.path.join(script_path, f"input_day{day}.txt"), encoding="utf-8") as input:
     #with open(os.path.join(script_path, f"test.txt"), encoding="utf-8") as input:
-        directions = input.readlines()
-    cmds = [(row[0], int(row[1:-1])) for row in directions] # list of tupels with cmd and par
+        directions = input.read().splitlines()
+    cmds = [(row[0], int(row[1:])) for row in directions] # list of tupels with cmd and par
     cmd_inc_or_decr = {"N": 1,
                         "S": -1,
                         "E": 1,

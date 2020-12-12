@@ -14,8 +14,7 @@ def main(day):
     script_path = os.path.dirname(os.path.realpath(__file__))
     with open(os.path.join(script_path, f"input_day{day}.txt"), encoding="utf-8") as input:
     #with open(os.path.join(script_path, f"test.txt"), encoding="utf-8") as input:
-        plan = input.readlines()
-    plan = [row.rstrip() for row in plan]
+        plan = input.read().splitlines()
     EMPTY = "L"
     FULL = "#"    
     FLOOR = "."
@@ -30,6 +29,8 @@ def main(day):
 
 
     #PART 1
+    print("***** PART 1 *****")
+
     def look1(plan, lookfor, r, c):
         count_adj = 0
         for ir in range(r - 1, r + 1 + 1): # rows above, same, and one below the seat
@@ -62,7 +63,7 @@ def main(day):
     simcnt = count(1)
     while True:
         changes = 0
-        print(f">> Simulation {next(simcnt)}\n", "\n".join(["".join(row)[1:-1] for row in simplan[1:-1]]) + "\n")
+        #print(f">> Simulation {next(simcnt)}\n", "\n".join(["".join(row)[1:-1] for row in simplan[1:-1]]) + "\n")
 
         for row in range(1, len(newplan) - 1):
             for col in range(1, len(newplan[0]) - 1):
@@ -75,7 +76,7 @@ def main(day):
             break
 
     result_part1 = sum([row.count(FULL) for row in simplan ])
-    print(f"Part 1: The occupied seats: {result_part1}") 
+    print(f"Part 1: The occupied seats: {result_part1}") #2152
     
     #! PART 2 starts here
     #!
@@ -126,7 +127,7 @@ def main(day):
     while True:
         changes = 0
         sim = next(simcnt)
-        print(f">> Simulation {sim}\n", "\n".join(["".join(row)[1:-1] for row in simplan[1:-1]]) + "\n")
+        #print(f">> Simulation {sim}\n", "\n".join(["".join(row)[1:-1] for row in simplan[1:-1]]) + "\n")
         for r in range(1, len(newplan)-1):
             for c in range(1,len(newplan[0]) - 1):
                 if simseating2(newplan, r, c):
@@ -139,6 +140,6 @@ def main(day):
             break
     
     result_part2=sum([row.count(FULL) for row in simplan ])
-    print(f"Part 2: The occupied seats: {result_part2}") #1973822685184
+    print(f"Part 2: The occupied seats: {result_part2}") #1937
 
 main(11)
