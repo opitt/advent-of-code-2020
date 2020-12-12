@@ -72,4 +72,8 @@ _General_
 
 _Python_
 * I practiced the zip function. Until I found out during refactoring, I did not need it.
+* PIL (pillow) package: I created my first animated gif with pillow. 
+![Day 11 simulation](https://github.com/opitt/advent-of-code-2020/blob/main/day11/sim_data/sim_82.gif)
 
+_Resources_
+*[Create animated gifs with PIL](https://note.nkmk.me/en/python-pillow-gif/)
