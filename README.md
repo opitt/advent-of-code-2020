@@ -63,3 +63,13 @@ _General_
 _Python_
 * I get used to the itertools. count was cool to use for one generic function, that can go in all directions through a matrix. I just pass the -1,0,+1 step value as parameter to the function. Inside I use count and the given step. 
 * Used copy.deepcopy again. 
+
+## Day 12
+_General_
+* Rotating, coordinations, moving relative, ... a nice mind challenge. Still much easier than yesterday's seating simulation.
+* Pen and paper have proven again to be super useful.
+* Started with just find "a" solution - with a lot of repeated code. When it worked, I refactored and deduplicated. It's much neater code to maintain - but is it easier to understand? I doubt.
+
+_Python_
+* I practiced the zip function. Until I found out during refactoring, I did not need it.
+
