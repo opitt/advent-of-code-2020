@@ -69,12 +69,21 @@ _General_
 * Rotating, coordinations, moving relative, ... a nice mind challenge. Still much easier than yesterday's seating simulation.
 * Pen and paper have proven again to be super useful.
 * Started with just find "a" solution - with a lot of repeated code. When it worked, I refactored and deduplicated. It's much neater code to maintain - but is it easier to understand? I doubt.
+* I learned to include images in github markdown. See below.
 
 _Python_
 * I practiced the zip function. Until I found out during refactoring, I did not need it.
-* PIL (pillow) package: I created my first animated gif with pillow.
+* PIL (pillow) package: I created my first animated gif with pillow:
+* os ... refreshed my kowledge on reading files from a directory.
+* And I nearly forgot the amazing generators. I used it for the first time to create a function, that yields always the next file name and content (sorted).
 
 ![Day 11 simulation](https://github.com/opitt/advent-of-code-2020/blob/main/day11/sim_data/sim_82.gif)
 
 _Resources_
-* ![Create animated gifs with PIL](https://note.nkmk.me/en/python-pillow-gif/)
+* [Create animated gifs with PIL](https://note.nkmk.me/en/python-pillow-gif/)
+* [Saving gif with PIL](https://pillow.readthedocs.io/en/latest/handbook/image-file-formats.html#saving)
+* [Color pallet generator](https://coolors.co/0e4749-95c623-e55812)
+* [Github markdown](https://guides.github.com/features/mastering-markdown/)
+* [Read/write files (Real Python)](https://realpython.com/read-write-files-python/#iterating-over-each-line-in-the-file)
+* [Understanding Generators (Real Python)](https://realpython.com/lessons/understanding-generators/)
+
