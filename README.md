@@ -87,3 +87,7 @@ _Resources_
 * [Read/write files (Real Python)](https://realpython.com/read-write-files-python/#iterating-over-each-line-in-the-file)
 * [Understanding Generators (Real Python)](https://realpython.com/lessons/understanding-generators/)
 
+** Day 14 
+_Python_
+* Convert an integer to binary with a defined length (f"{value:036b}) and back to an integer (using int(value, 2))
+* Getting used to the zip function. Zipped the mask with the binary value.
