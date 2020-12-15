@@ -91,3 +91,13 @@ _Resources_
 _Python_
 * Convert an integer to binary with a defined length (f"{value:036b}) and back to an integer (using int(value, 2))
 * Getting used to the zip function. Zipped the mask with the binary value.
+
+** Day 15
+_General_
+* Reminder! Pen and paper is essential to develop an algorithm. From intuition to explicit rules (code) it's a long way ...
+
+_Python_
+* Used the profiler package cProfile to find out where the performance is lost. It was the index() function. Obviously the longer the list, the longer it takes ... and 300000000 is very long ...
+
+_Resources_
+* [cProfile documentation](https://docs.python.org/3/library/profile.html)
