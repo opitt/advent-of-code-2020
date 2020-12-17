@@ -101,3 +101,14 @@ _Python_
 
 _Resources_
 * [cProfile documentation](https://docs.python.org/3/library/profile.html)
+
+** Day 16 **
+_General_
+* My brain needs a rest. Long working days are not good for a night of AoC.
+
+_Python_
+* Working with sets. Good to know, that you can't directly access set elements (as they are unsorted). Bad to find that out, when you need the elements. OMG, I wrote something like this: [{"type"}][0] (don't tell anyone).
+
+** Day 17
+_General_
+* I fall behind. 
