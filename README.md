@@ -119,4 +119,4 @@ _Python_
 ** Day 18 
 _Python_
 * I remembered the reduce function from the functools library. Together with a lambda function it multiplies the content of a list very nicely (pythonic). 
-```result = reduce(lambda x, a: x*y, [1,2,3,4])```
+```result = reduce(lambda x, y: x*y, [1,2,3,4])```
