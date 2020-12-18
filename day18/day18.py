@@ -13,7 +13,8 @@ def main(day):
         #e.g. (4 * (5 + 9 + 8) + 7) * 6    
         #find parenthesis and recursively calculate the expression
         while "(" in e:
-            p1, p2  = e.rfind("("), e.find(")", p1)
+            p1 = e.rfind("(")
+            p2 = e.find(")", p1)
             val = calculate(e[p1+1:p2])
             #replace the parenthesis with the calculated value
             e = e[:p1] + str(val) + e[p2+1:]
@@ -32,7 +33,8 @@ def main(day):
     def calculate2(e):
         #e.g. (4 * (5 + 9 + 8) + 7) * 6    
         while "(" in e:
-            p1, p2 = e.rfind("("), e.find(")", p1)
+            p1 = e.rfind("(")
+            p2 = e.find(")", p1)
             val = calculate2(e[p1+1:p2])
             e = e[:p1] + str(val) + e[p2+1:]
 
