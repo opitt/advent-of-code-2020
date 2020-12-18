@@ -112,3 +112,11 @@ _Python_
 ** Day 17
 _General_
 * I fall behind. 
+
+_Python_
+* The unpacking of iterables is not really intuitive yet (for me) - in the context of list comprehensions. More to learn for me.
+
+** Day 18 
+_Python_
+* I remembered the reduce function from the functools library. Together with a lambda function it multiplies the content of a list very nicely (pythonic). 
+```result = reduce(lambda x, a: x*y, [1,2,3,4])```
