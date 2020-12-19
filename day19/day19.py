@@ -3,13 +3,25 @@
 import os
 import re
 
-def main(day):
+
+def read_input(split_lines_by, day, test_file=False):
     # READ INPUT FILE
     script_path = os.path.dirname(os.path.realpath(__file__))
-    with open(os.path.join(script_path, f"input_day{day}.txt"), encoding="utf-8") as input:
-    #with open(os.path.join(script_path, f"test.txt"), encoding="utf-8") as input:
-    #with open(os.path.join(script_path, f"test2.txt"), encoding="utf-8") as input:
-        rules_msgs = input.read().split("\n\n")  #.splitlines()
+    if test_file:
+        #path = os.path.join(script_path, f"test.txt")
+        path = os.path.join(script_path, f"test2.txt")
+    else:
+        path = os.path.join(script_path, f"input_day{day}.txt")
+    with open(path, encoding="utf-8") as input:
+        if split_lines_by == "\n":
+            input_list = input.splitlines()
+        else:
+            input_list = input.read().split(split_lines_by)
+    return input_list
+
+#!  ############ MAIN ###############
+def main(day):
+    rules_msgs = read_input("\n\n", day, test_file=False)
     ''' example rules ...
     0: 4 1 5
     1: 2 3 | 3 2
@@ -18,7 +30,7 @@ def main(day):
     4: "a"
     5: "b"
     '''
-
+    
     #! ################# PART 1 #################
     #!
     # building a rule dict 
@@ -52,7 +64,7 @@ def main(day):
     for line in rules_msgs[0].splitlines():
         k, v = line.split(": ")[0], line.split(": ")[1]
         if k == "8":
-            #this is the org logic:      v = "42 | 42 8"
+            # this is the org logic:      v = "42 | 42 8"
             v = "(?: 42 )+"  # this is the improved/simplified rule ( 
             # (?:xx) can be used for uncaptured groups -  helps testing at regex101 - and could be faster)
         elif k == "11":
@@ -60,7 +72,8 @@ def main(day):
             #v = "(?P<AA>(?: 42 )+)(?P<BB>(?: 31 )+)"
             v = "|".join([f"(?: 42 ){{{i}}}(?: 31 ){{{i}}}" for i in range(1, 11)])
             # works only until 10
-        v = v.replace('"', '')  # skip the " chars for a or b values
+        else:
+            v = v.replace('"', '')  # skip the " chars for a or b values
         v = " (?: " + v + " ) "
         rules[k] = v
 
