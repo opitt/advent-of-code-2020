@@ -36,17 +36,27 @@ def main(day):
     #! PART 2 starts here
     #!
     bus_max = buses_sorted[-1]
-    t = 100000000000000 // bus_max
+    t = 200000000000000 // bus_max
     t = t * bus_max - bus_offset[bus_max]
     
-    chek = [(bus, offset) for bus, offset in bus_offset.items() if bus != bus_max]
-    while sum([(t + offset) % bus for bus, offset in chek]) != 0:
+    #chek = [(bus, offset) for bus, offset in bus_offset.items() if bus != bus_max]
+    #while sum([(t + offset) % bus for bus, offset in chek]) != 0:
         #next_arrival = next_arrivals_fct(buses, t)
         #for bus, offset in bus_offset[:-1].items(): # the last one is already valid, as we add it to the star t
         #    valid_t &= (t + offset ) % bus == 0  #
         #if valid_t:
         #    break
-        t += bus_max
+    #    t += bus_max
+
+    t_matches = 1
+    while True:
+        if t % buses_sorted[-1 * t_matches] == 0:
+            t_matches = 0
+    diff = t - t_match
+    if t
+        t_matches += 1
+    t += diff
+
 
     result_part2 = t
     print(f"Part 2: start time is: {result_part2}") #
