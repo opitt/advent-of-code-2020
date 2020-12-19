@@ -87,12 +87,12 @@ _Resources_
 * [Read/write files (Real Python)](https://realpython.com/read-write-files-python/#iterating-over-each-line-in-the-file)
 * [Understanding Generators (Real Python)](https://realpython.com/lessons/understanding-generators/)
 
-** Day 14 
+## Day 14
 _Python_
 * Convert an integer to binary with a defined length (f"{value:036b}) and back to an integer (using int(value, 2))
 * Getting used to the zip function. Zipped the mask with the binary value.
 
-** Day 15
+## Day 15
 _General_
 * Reminder! Pen and paper is essential to develop an algorithm. From intuition to explicit rules (code) it's a long way ...
 
@@ -102,30 +102,35 @@ _Python_
 _Resources_
 * [cProfile documentation](https://docs.python.org/3/library/profile.html)
 
-** Day 16 **
+## Day 16
 _General_
 * My brain needs a rest. Long working days are not good for a night of AoC.
 
 _Python_
 * Working with sets. Good to know, that you can't directly access set elements (as they are unsorted). Bad to find that out, when you need the elements. OMG, I wrote something like this: [{"type"}][0] (don't tell anyone).
 
-** Day 17
+## Day 17
 _General_
+
 * I fall behind. 
 
 _Python_
 * The unpacking of iterables is not really intuitive yet (for me) - in the context of list comprehensions. More to learn for me.
 
-** Day 18 
+## Day 18 
 _Python_
+
 * I remembered the reduce function from the functools library. Together with a lambda function it multiplies the content of a list very nicely (pythonic). 
 ```result = reduce(lambda x, y: x*y, [1,2,3,4])```
 
-** Day 19 **
+## Day 19
 _Python_
 * re: Named matching groups ```(?P<MG1>    )``` and matching groups, that are not captured: ```(?:  )```
 * re: it's not possible to count with regular expressions
 * I got really frustrated with re (and learned a lot). Finally I used a cheat (hard coded max limit) - recommended by a colleague. I could not find out how to validated the recursive rule: ```11: 42 31 | 42 11 31```. I simpified it to ```42 (42 (42...31) 32) 31``` with "+" occurances. But we can't write it like ```(42)+(31)+``` because both rules 42 and 31 need to have the same occurance. How do we find out, if the matches are valid, i.e. matched the same times? I gave the match groups a name ```(?P<AA>(42)+)(?P<BB>(31)+)```- and accessed it after a match. But I actually did not find out, how many times each of them matched ... if you have a tip - please reach out!
 
 _Resources_
-*[Regex101, and amazing site to learn and test regular expressions](https://regex101.com/)
+* [Regex101, and amazing site to learn and test regular expressions](https://regex101.com/)
+
+_General_
+* Need to practice my markdown skills more ... just noticed, that my README looked awfull.
