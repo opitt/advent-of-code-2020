@@ -120,3 +120,12 @@ _Python_
 _Python_
 * I remembered the reduce function from the functools library. Together with a lambda function it multiplies the content of a list very nicely (pythonic). 
 ```result = reduce(lambda x, y: x*y, [1,2,3,4])```
+
+** Day 19 **
+_Python_
+* re: Named matching groups ```(?P<MG1>    )``` and matching groups, that are not captured: ```(?:  )```
+* re: it's not possible to count with regular expressions
+* I got really frustrated with re (and learned a lot). Finally I used a cheat (hard coded max limit) - recommended by a colleague. I could not find out how to validated the recursive rule: ```11: 42 31 | 42 11 31```. I simpified it to ```42 (42 (42...31) 32) 31``` with "+" occurances. But we can't write it like ```(42)+(31)+``` because both rules 42 and 31 need to have the same occurance. How do we find out, if the matches are valid, i.e. matched the same times? I gave the match groups a name ```(?P<AA>(42)+)(?P<BB>(31)+)```- and accessed it after a match. But I actually did not find out, how many times each of them matched ... if you have a tip - please reach out!
+
+_Resources_
+*[Regex101, and amazing site to learn and test regular expressions](https://regex101.com/)
