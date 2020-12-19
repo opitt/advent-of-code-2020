@@ -16,6 +16,7 @@ def count_neighbours(cubeZYX, z, y, x, state):
                 state_count[s] += 1
     return state_count[state]
 
+
 def count_active(cubeZYX):
     cnt = 0
     for z in cubeZYX:
