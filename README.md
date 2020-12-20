@@ -134,3 +134,10 @@ _Resources_
 
 _General_
 * Need to practice my markdown skills more ... just noticed, that my README looked awfull.
+
+## Day 20 
+_General_
+* It's getting complex here. Spent the whole day - finally I solved part 1 and got stuck on part 2. How to turn and flip the tiles ... 
+
+_Python_
+* The zip function, I practicesd it a lot today. Very handy to access columns of list of lists. But still somewhat ... confuse. Since you need to convert the result from sets to lists to strings ...
