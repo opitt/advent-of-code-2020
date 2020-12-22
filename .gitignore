@@ -4,3 +4,4 @@ aoc2020.code-workspace
 .vscode/.ropeproject/objectdb
 .vscode/.ropeproject/config.py
 day13/inspiration.py
+day22/ayuko.py
