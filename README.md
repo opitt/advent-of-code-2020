@@ -141,3 +141,14 @@ _General_
 
 _Python_
 * The zip function, I practicesd it a lot today. Very handy to access columns of list of lists. But still somewhat ... confuse. Since you need to convert the result from sets to lists to strings ...
+
+## Day 22
+_General_
+* It is very exhausting to read the AoC. I missed today a sentence, and my code - obviously - did not finish. Very frustrating - until I saw the code of a colleague, and wondered why she did what she did. Ahhh. Reading the f... instructions. My bad.
+
+_Python_
+* I learned the extend function list a list. It appends multiple values to the list instead of a single one. Nice.
+* I need to look into deque - from the collections library. Double ended que ... interesting!
+* islice is another function from collections I want to know more about.
+
+
