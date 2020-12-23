@@ -151,4 +151,7 @@ _Python_
 * I need to look into deque - from the collections library. Double ended que ... interesting!
 * islice is another function from collections I want to know more about.
 
+## Day 23 
+_Python_
+* Looked deeper into deque (pronounced deck). Really nice lib to rotate arrays, add left and right of a list without slicing.
 
