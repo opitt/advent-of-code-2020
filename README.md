@@ -155,3 +155,8 @@ _Python_
 _Python_
 * Looked deeper into deque (pronounced deck). Really nice lib to rotate arrays, add left and right of a list without slicing.
 
+## Day 24
+_General_
+* Broke today my code into super small chunks. This made the final code super easy to read. And I could optimise, i.e. not have to do same calculations in many places. Reduces the failure risk, and once the function works - one an build on it.
+
+**Merry Christmas!**
