@@ -1,20 +1,22 @@
 import os
 from copy import deepcopy
 
-xy_go = {"e": (2, 0),
-            "w": (-2, 0),
-            "ne": (1, 1),
-            "se": (1, -1),
-            "nw": (-1, 1),
-            "sw": (-1, -1),
+# Here, tiles immediately adjacent means the six tiles directly touching the tile in question.
+# draw a coordinate system with hexagons. Each hexagons centerpoint has a unique on (x,y) position
+steps_xy = {"e": (2, 0),
+         "w": (-2, 0),
+        "ne": (1, 1),
+        "se": (1, -1),
+        "nw": (-1, 1),
+        "sw": (-1, -1),
 }
 
-def next_tile(tilepos, direction):
-    return (tilepos[0] + xy_go[direction][0],
-            tilepos[1] + xy_go[direction][1])
+def get_neighbour(tilepos, direction):
+    return (tilepos[0] + steps_xy[direction][0],
+            tilepos[1] + steps_xy[direction][1])
 
-def get_neighbours(tilepos):
-    return [next_tile(tilepos, direction) for direction in xy_go.keys()]
+def get_all_neighbours(tilepos):
+    return [get_neighbour(tilepos, direction) for direction in steps_xy.keys()]
 
 def is_black(fp, tilepos):
     return fp.get(tilepos, False) == True
@@ -32,27 +34,19 @@ def flip_tile(fp, tilepos):
     else:
         set_tile_black(fp,tilepos)
 
-def count_black_adjacent(fp, tilepos):
-    #TODO use comprehension
-    black = 0
-    for tile in get_neighbours(tilepos): 
-        black += is_black(fp, tile)
-    return black
+def count_adjacent_black(fp, tilepos):
+    return sum([is_black(fp, tile) for tile in get_all_neighbours(tilepos)])
 
-def next_direction(tilepath):
+def next_direction(directions):
     #sesenwnenenewseeswwswswwnenewsewsw
-    direction = tilepath[:2]
-    if direction in ["se", "sw", "ne", "nw"]:        
-        return direction, tilepath[2:]
-    return tilepath[0], tilepath[1:]
+    next_dir = directions[:2]
+    return (next_dir, directions[2:]) if next_dir in ["se", "sw", "ne", "nw"] else (directions[0], directions[1:])
     
 def calc_tilepos(tilepath):
     tilepos = (0,0)
     while tilepath:
-        step, tilepath = next_direction(tilepath)
-        #print(tilepos, step)
-        tilepos = next_tile(tilepos, step)
-    #print(tilepos)
+        next_dir, tilepath = next_direction(tilepath)
+        tilepos = get_neighbour(tilepos, next_dir)
     return tilepos
 
 def main():
@@ -61,43 +55,37 @@ def main():
     #with open(os.path.join(script_path, f"test.txt"), encoding="utf-8") as input:
         tilepaths = input.read().splitlines()
     
-    floorplan = {}
+    # floorplan only contains black tiles, I dont store white tiles 
+    floorplan_blacktiles = {}  # (x,y): True 
+    
+    ########### PART 1 #############
     for tilepath in tilepaths:
         tilepos = calc_tilepos(tilepath)
-        flip_tile(floorplan, tilepos)
+        flip_tile(floorplan_blacktiles, tilepos)
 
-    result = sum(floorplan.values())
+    result = sum(floorplan_blacktiles.values())
     print(f"Black tiles: {result}")
 
-    #floorplan = {(0, 0): True,
-    #             (1, 1): True,
-    #            }
-    result = sum(floorplan.values())
-    print(f"Day 0: {result}")   
-    #get_tile_neighbours_pos((0,0))
-    # Every day, the tiles are all flipped according to the following rules:
+    ########### PART 2 #############
+    fp_next = deepcopy(floorplan_blacktiles)
     for day in range(1, 101):
-        fp_next = deepcopy(floorplan)
-        # floorplan only contains black tiles, since white tiles are not stored 
-        # Here, tiles immediately adjacent means the six tiles directly touching the tile in question.
-        for blacktile in floorplan.keys():
+        for blacktile in floorplan_blacktiles.keys():
             # BLACK
-            black = count_black_adjacent(floorplan, blacktile)
+            black = count_adjacent_black(floorplan_blacktiles, blacktile)
             if black == 0 or black > 2:
                 #Any black tile with zero or more than 2 black tiles immediately adjacent to it is flipped to white.
                 set_tile_white(fp_next, blacktile)
             # WHITE
-            neighbours = get_neighbours(blacktile)
+            neighbours = get_all_neighbours(blacktile)
             for neighbour in neighbours:
-                if not is_black(floorplan, neighbour):
-                    black = count_black_adjacent(floorplan, neighbour)
+                if not is_black(floorplan_blacktiles, neighbour):
+                    black = count_adjacent_black(floorplan_blacktiles, neighbour)
                     #Any white tile with exactly 2 black tiles immediately adjacent to it is flipped to black.
                     if black == 2:
                         set_tile_black(fp_next, neighbour)
-
-        floorplan = deepcopy(fp_next)
-        result = sum(floorplan.values())
-        print(f"Day {day}: {result}")
+        floorplan_blacktiles = deepcopy(fp_next)
+        result = sum(floorplan_blacktiles.values())
+        print(f"Day {day}: {result}") #3636
 
 
 main()
