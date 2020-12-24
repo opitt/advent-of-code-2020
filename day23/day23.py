@@ -1,6 +1,7 @@
 from collections import deque
 
 cups = list(map(int, "186524973"))
+cups.extend(list(range(10,1000*1000+1)))  
 #cups = list(map(int, "389125467")) #test
 
 min_cup = min(cups)
@@ -9,7 +10,7 @@ max_idx = len(cups)-1
 cups = deque(cups)
 
 cur = cups[0]
-for i in range(100):
+for i in range(1000*1000):
     # The crab picks up the three cups that are immediately clockwise of the current cup. They are removed from the circle; 
     # cup spacing is adjusted as necessary to maintain the circle.
     cur = cups[0] # keep the current cup always at position 0
@@ -18,7 +19,7 @@ for i in range(100):
     pickup.append(cups.popleft())
     pickup.append(cups.popleft())
     cups.rotate(1)
-    #print(f"-- move {i+1} --\n")
+    print(f"-- move {i+1} --\n")
     #print(f"cups ({cur}) : {cups}")
     #print(f"pickup {pickup}")
 
@@ -40,7 +41,6 @@ for i in range(100):
     # They keep the same order as when they were picked up.
     #print(f"destination: {dest}")
 
-    
     dest_idx = cups.index(dest) # where is the destination?
     cups.rotate(-dest_idx-1)    # move destination to the end of the cups
     cups.extendleft(reversed(pickup)) # append the pickup on the left side (reversed necessary)
