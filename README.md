@@ -142,6 +142,14 @@ _General_
 _Python_
 * The zip function, I practicesd it a lot today. Very handy to access columns of list of lists. But still somewhat ... confuse. Since you need to convert the result from sets to lists to strings ...
 
+## Day 21
+_General_
+* The task was challenging - not to code, but to grasp. My approach turned out wrong. (take a food with only one allergene - since only those ingredients can have that allergene; if the allergene then shows up in another food, with different ingredients, it could only be the earlier found ones ... but that is only partly true. What if a new ingredient also includes the same allergene? Now I have two ingredients with soy ... In the end I got a tip - keep the ingredients, that show up in all food with the same allergene. Those are then the candidates to contain the allergen.)
+
+_Python_
+* Working with sets. Is not difficult, but to actually unpacking a remaining element in a set was more tricky than I thought. Especially in a comprehension, as the set elements can't be accessed by []. I converted the set into a list ... but I think, that's not the best way.
+* Sorted function on dictionaries - containing a set as value. This was a challenging excercise. I split it finally in two parts. First, convert the values into a list, than use a lambda function in the sorted key= parameter.
+
 ## Day 22
 _General_
 * It is very exhausting to read the AoC. I missed today a sentence, and my code - obviously - did not finish. Very frustrating - until I saw the code of a colleague, and wondered why she did what she did. Ahhh. Reading the f... instructions. My bad.
