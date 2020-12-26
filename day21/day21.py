@@ -26,27 +26,31 @@ def main(day):
 
     #! ################# PART 1 #################
     # READ FILE
-    al_ing = defaultdict(set)      # allergens: ingredients
+    al_ing = {}  # allergens possibly contained in: ingredients
     ings = set()  # all ingrediens
-    ing_cnt = defaultdict(int)
-    for f_idx, food in enumerate(food_list):
-        ingredients = set(food.split(" (contains ")[0].split(" "))
-        for ing in ingredients:
-            ing_cnt[ing] += 1
-        ings = ings.union(ingredients)  # ab = a | b
+    ings_cnt = defaultdict(int) # count ingredients across all food
+    for food in food_list:
+        food_ings = set(food.split(" (contains ")[0].split(" "))
+        for ing in food_ings:
+            ings_cnt[ing] += 1
+        ings = ings.union(food_ings)  # ab = a | b
     
-        allergens = food.split(" (contains ")[1].split(", ")
-        for allergen in allergens:
+        food_al = food.split(" (contains ")[1].split(", ")
+        for allergen in food_al:
             if al_ing.get(allergen, None) == None:
-                al_ing[allergen] = ingredients
+                al_ing[allergen] = food_ings
             else:
-                al_ing[allergen] = al_ing[allergen].intersection(ingredients)
+                #! THIS IS THE CRITICAL LOGIC
+                # soy: A B
+                # soy: B C D
+                # soy = B ... probably
+                al_ing[allergen] = al_ing[allergen].intersection(food_ings)
             
-    ing_withno_a = deepcopy(ings)
+    ing_without_al = deepcopy(ings)
     for ing in al_ing.values():
-        ing_withno_a = ing_withno_a.difference(ing) # a - b
+        ing_without_al = ing_without_al.difference(ing) # a - b
     
-    result = sum([cnt for ing, cnt in ing_cnt.items() if ing in ing_withno_a])
+    result = sum([cnt for ing, cnt in ings_cnt.items() if ing in ing_without_al])
     print(f"Result {result}") #
 
     #! ################ PART 2 #################
