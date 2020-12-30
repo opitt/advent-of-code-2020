@@ -24,7 +24,6 @@ def main(day):
     tiles_file = [ line for line in read_input("\n\n", day, test_file=False) if line != ""]
 
     #! ################# PART 1 #################
-
     # READ FILE
     tiles = {}
     for line in tiles_file:
@@ -63,7 +62,8 @@ def main(day):
             result *= int(title)
     print(f"Result {result}") #17250897231301
 
-    t_match_t = {}
+    #! ################ PART 2 #################
+    t_match_t = {} # tiles and what tiles they match with
     for tile, matches in t_match.items():
         t_match_t[tile] = list(set(matches.values()))
     
@@ -85,30 +85,25 @@ def main(day):
                     return tile
         return None
 
-    image = [[]]
+    image_tiles = [[]]
     for y in range(12):
         for x in range(12):
-            image[y].append("")
-        image.append([])
+            image_tiles[y].append("")
+        image_tiles.append([])
 
     for y in range(12):
         for x in range(12):
-            # get the next tile
-            criteria = []
+            criteria = [] # what tile to look for
             if x-1 >= 0:
-                tile_attached = image[y][x - 1]
-                criteria.append(tile_attached)
-            if x + 1 < 12:
-                tile_attached = image[y][x + 1]
-                criteria.append(tile_attached)
+                criteria.append(image_tiles[y][x - 1]) # need to connect with x-1 tile
             if y - 1 >= 0:
-                tile_attached = image[y - 1][x]
-                criteria.append(tile_attached)
+                criteria.append(image_tiles[y - 1][x]) # need to connect with y-1 tile
+            if x + 1 < 12:
+                criteria.append(image_tiles[y][x + 1]) # need to connect with x+1 tile
             if y + 1 < 12:
-                tile_attached = image[y + 1][x]
-                criteria.append(tile_attached)
+                criteria.append(image_tiles[y + 1][x])
             next_tile = find_tile_matching(criteria)
-            image[y][x] = next_tile
+            image_tiles[y][x] = next_tile
             for tile in criteria:
                 if tile != "":
                     # remove connection wit me from the other tile
@@ -116,11 +111,96 @@ def main(day):
                     t_match_t[tile].append("")
                     # remove the connection to other tile from myself
                     t_match_t[next_tile].remove(tile)
-                    t_match_t[next_tile].append("")
-    #       t_match_t[next_tile].remove(image[y][x])  # remove the prev connection from the current tile
-        
+                    t_match_t[next_tile].append("")        
+    
 
-    print("So what")
+
+    #TODO rotate/flip the tiles, so they match to their neighbours
+    def rotate_tile90(tile):
+        rotated = ["".join(l) for l in list(map(list,zip(*reversed(tile))))] 
+        return rotated
+
+    def flip_tile(tile, leftright = True):
+        if leftright:
+            flipped = ["".join(reversed(l)) for l in tile]
+        else:
+            flipped = [l for l in reversed(tile)] 
+        return flipped
+
+    def print_image():
+        for y in range(2):
+            zipped = list(map(list, zip(*image[y][:2])))
+            for z in zipped:
+                print("".join(z))
+
+    def side_match_tiles(tile1, tile2, where):
+        #where: 0 - top, 1 - right, 2 - bottom, 3 - left
+        if where == 0:
+            return tile1[0] == tile2[-1]
+        if where == 2:
+            return tile1[-1] == tile2[0]
+        if where == 1:
+            t1 = ["".join(l) for l in list(map(list, zip(*tile1)))][-1]
+            t2 = ["".join(l) for l in list(map(list, zip(*tile2)))][0]
+            return t1 == t2
+        if where == 3:
+            t1 = ["".join(l) for l in list(map(list, zip(*tile1)))][0]
+            t2 = ["".join(l) for l in list(map(list, zip(*tile2)))][-1]
+            return t1 == t2
+        raise RuntimeWarning
+            
+
+    image = deepcopy(image_tiles)
+    for y in range(12):
+        for x in range(12):
+            image[y][x] = tiles[image_tiles[y][x]]
+    #TODO it sees, that this logic does not work. 
+    #TODO maybe the whole logic is wrong?
+    for y in range(12):
+        for x in range(11):
+            if y > 0 and x == 0:
+                #first tile in a row needs to match above tile
+                while True:
+                    # try to change the tile
+                    match = side_match_tiles(image[y][x], image[y-1][x], where=0)
+                    if match:
+                        break
+                    image[y][x] = rotate_tile90(image[y][x])
+                    match = side_match_tiles(image[y][x], image[y-1][x], where=0)
+                    if match:
+                        break
+                    image[y][x] = flip_tile(image[y][x],leftright=True)
+                    match = side_match_tiles(image[y][x], image[y-1][x], where=0)
+                    if match:
+                        break
+                    image[y][x] = flip_tile(image[y][x], leftright=True)
+            else:
+                while True:
+                    # try to change the next tile
+                    match = side_match_tiles(image[y][x], image[y][x+1], where=1)
+                    if match:
+                        break
+                    image[y][x+1] = rotate_tile90(image[y][x + 1])
+                    match = side_match_tiles(image[y][x], image[y][x+1], where=1)
+                    if match:
+                        break
+                    image[y][x + 1] = flip_tile(image[y][x + 1],leftright=False)
+                    match = side_match_tiles(image[y][x], image[y][x+1], where=1)
+                    if match:
+                        break
+                    image[y][x + 1] = flip_tile(image[y][x + 1], leftright=False)
+            pass
+                
+            
+    
+    #TODO TEST MY FUNCTIONS
+    #print("\norg\n", "\n".join(image[0][0]), sep="")
+    #print("\nrot\n", "\n".join(rotate_tile90(image[0][0])), sep="")
+    #print("\nflip\n", "\n".join(flip_tile(image[0][0], leftright=True)), sep="")
+    #print("\nflip\n", "\n".join(flip_tile(image[0][0], leftright=False)), sep="")
+    #print(side_match_tiles(image[0][0], image[0][1], where=1) )
+    #print_image()
+
     pass
 
 main(20)
